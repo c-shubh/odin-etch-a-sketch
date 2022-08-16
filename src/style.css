@@ -1,3 +1,23 @@
 * {
   box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+}
+
+.cell-grid {
+  border: 1px solid black;
+  width: 40vw;
+  height: 40vw;
+  display: flex;
+  flex-wrap: wrap;
+
+  --cellSize: 0;
+}
+
+.cell {
+  border: 1px solid hsl(0deg 0% 18%);
+  width: var(--cellSize);
+  height: var(--cellSize);
+}
