@@ -10,14 +10,12 @@ body {
   border: 1px solid black;
   width: 40vw;
   height: 40vw;
-  display: flex;
-  flex-wrap: wrap;
-
-  --cellSize: 0;
+  display: grid;
+  --size: 16;
+  grid-template-columns: repeat(var(--size), 1fr);
+  grid-template-rows: repeat(var(--size), 1fr);
 }
 
 .cell {
   border: 1px solid hsl(0deg 0% 18%);
-  width: var(--cellSize);
-  height: var(--cellSize);
 }
