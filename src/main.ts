@@ -1,19 +1,44 @@
 import Grid from './Grid';
-import { Mode } from './Shared';
+import { Mode, Tool } from './Shared';
 
 const grid = new Grid(<HTMLDivElement>document.querySelector('.cell-grid'));
-grid.paintGridToDOM();
+grid.insertGridToDOM();
 
-const drawRadio = document.getElementById('draw')!;
-const eraseRadio = document.getElementById('erase')!;
+const pencilRadio = document.getElementById('pencil')!;
+const eraserRadio = document.getElementById('eraser')!;
+const hoverRadio = document.getElementById('hover')!;
+const clickNDragRadio = document.getElementById('click-n-drag')!;
+
+function handleToolChange(e: Event) {
+  const tool = (e.target as HTMLInputElement).value;
+  switch (tool) {
+    case 'pencil':
+      grid.setTool(Tool.pencil);
+      break;
+    case 'eraser':
+      grid.setTool(Tool.eraser);
+      break;
+  }
+}
 
 function handleModeChange(e: Event) {
-  const mode = (e.target as HTMLInputElement).value
-  if (mode === 'draw')
-    grid.mode = Mode.draw;
-  else if(mode === 'erase')
-    grid.mode = Mode.erase;
+  const mode = (e.target as HTMLInputElement).value;
+  switch (mode) {
+    case 'click-n-drag':
+      grid.setMode(Mode.clickNDrag);
+      break;
+    case 'hover':
+      grid.setMode(Mode.hover);
+      break;
+  }
 }
-[drawRadio, eraseRadio].forEach(radio => radio.addEventListener('click', handleModeChange));
 
-export { };
+[pencilRadio, eraserRadio].forEach((radio) =>
+  radio.addEventListener('click', handleToolChange)
+);
+
+[hoverRadio, clickNDragRadio].forEach((radio) =>
+  radio.addEventListener('click', handleModeChange)
+);
+
+export {};

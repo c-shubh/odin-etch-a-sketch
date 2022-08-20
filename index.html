@@ -11,10 +11,18 @@
 
 <body>
   <div class="controls">
-    <input type="radio" name="mode" id="draw" value="draw" checked>
-    <label for="draw">Draw</label>
-    <input type="radio" name="mode" id="erase" value="erase">
-    <label for="erase">Erase</label>
+    <div>
+      <input type="radio" name="tool" id="pencil" value="pencil" checked>
+      <label for="pencil">Pencil</label>
+      <input type="radio" name="tool" id="eraser" value="eraser">
+      <label for="eraser">Eraser</label>
+    </div>
+    <div>
+      <input type="radio" name="mode" id="click-n-drag" value="click-n-drag" checked>
+      <label for="click-n-drag">Click-n-drag</label>
+      <input type="radio" name="mode" id="hover" value="hover">
+      <label for="hover">Hover</label>
+    </div>
   </div>
   <div class="cell-grid"></div>
   <script type="module" src="src/main.ts"></script>

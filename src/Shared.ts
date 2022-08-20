@@ -1,6 +1,11 @@
-enum Mode {
-  erase,
-  draw,
+enum Tool {
+  eraser,
+  pencil,
 }
 
-export { Mode };
+enum Mode {
+  hover,
+  clickNDrag,
+}
+
+export { Mode, Tool };
