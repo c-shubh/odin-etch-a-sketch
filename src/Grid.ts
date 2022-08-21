@@ -45,6 +45,12 @@ class Grid {
     }
   }
 
+  public clearGrid = () => {
+    for (const cell of this.gridDOM.children) {
+      this.erase(cell as HTMLDivElement);
+    }
+  };
+
   /* ========================== Private Functions =========================== */
 
   // Member functions cannot be used as callback to addEventListener
@@ -54,6 +60,7 @@ class Grid {
     if (this.mode !== Mode.hover) return;
     this.performToolActionOnCell(e.target as HTMLDivElement);
   };
+
   private handleClickNDragMode = (e: Event) => {
     if (this.mode !== Mode.clickNDrag) return;
     switch (e.type) {

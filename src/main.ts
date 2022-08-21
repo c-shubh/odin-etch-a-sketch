@@ -8,6 +8,7 @@ const pencilRadio = document.getElementById('pencil')!;
 const eraserRadio = document.getElementById('eraser')!;
 const hoverRadio = document.getElementById('hover')!;
 const clickNDragRadio = document.getElementById('click-n-drag')!;
+const clearButton = document.getElementById('clear')!;
 
 function handleToolChange(e: Event) {
   const tool = (e.target as HTMLInputElement).value;
@@ -40,5 +41,7 @@ function handleModeChange(e: Event) {
 [hoverRadio, clickNDragRadio].forEach((radio) =>
   radio.addEventListener('click', handleModeChange)
 );
+
+clearButton.addEventListener('click', grid.clearGrid);
 
 export {};
