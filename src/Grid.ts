@@ -32,35 +32,52 @@ class Grid {
   constructor(gridDOM: HTMLDivElement, size?: number) {
     this.gridDOM = gridDOM;
     if (size) {
-      // the default size is 16 which if changed,
-      // should be modified in CSS too
-      this.size = size;
-      gridDOM.style.setProperty('--size', '' + size);
+      this.setSize(size);
     }
   }
 
+  /**
+   * Insert a grid to the DOM.
+   */
   public insertGridToDOM() {
-    for (let i = this.size ** 2; i >= 1; i--) {
-      this.gridDOM.append(this.newCell());
-    }
+    this.appendCells(this.size ** 2);
   }
 
-  public clearGrid = () => {
+  /**
+   * Apply the erase tool on all cells.
+   */
+  public eraseAllCells = () => {
     for (const cell of this.gridDOM.children) {
       this.erase(cell as HTMLDivElement);
     }
   };
 
+  /**
+   * Change the grid size and populate the grid with cells.
+   */
+  public changeSize(size: number) {
+    this.setSize(size);
+    this.deleteAllCells();
+    this.appendCells(size ** 2);
+  }
+
   /* ========================== Private Functions =========================== */
 
-  // Member functions cannot be used as callback to addEventListener
+  // Member functions cannot be used as callback to addEventListener, so
+  // use an arrow function expression.
   // See: https://stackoverflow.com/questions/43727516/how-adding-event-handler-inside-a-class-with-a-class-method-as-the-callback/43727582#43727582
 
+  /**
+   * Handle events for the hover mode.
+   */
   private handleHoverMode = (e: Event) => {
     if (this.mode !== Mode.hover) return;
     this.performToolActionOnCell(e.target as HTMLDivElement);
   };
 
+  /**
+   * Handle events for the click-n-drag mode.
+   */
   private handleClickNDragMode = (e: Event) => {
     if (this.mode !== Mode.clickNDrag) return;
     switch (e.type) {
@@ -76,6 +93,9 @@ class Grid {
     }
   };
 
+  /**
+   * Perform the selected tool's action on given `cell`.
+   */
   private performToolActionOnCell(cell: HTMLDivElement) {
     switch (this.tool) {
       case Tool.pencil:
@@ -87,14 +107,24 @@ class Grid {
     }
   }
 
+  /**
+   * Draw on the cell.
+   */
   private pencilDraw(cell: HTMLDivElement) {
     cell.style.backgroundColor = 'black';
   }
 
+  /**
+   * Erase the cell.
+   */
   private erase(cell: HTMLDivElement) {
     cell.style.backgroundColor = '';
   }
 
+  /**
+   * Create and return a new 'cell' with added style classes and event
+   * listeners.
+   */
   private newCell(): HTMLDivElement {
     const cell = document.createElement('div');
     cell.classList.add('cell');
@@ -107,6 +137,30 @@ class Grid {
     cell.addEventListener('mouseup', this.handleClickNDragMode);
     cell.ondragstart = () => false;
     return cell;
+  }
+
+  /**
+   * Set the grid size in this instance and the CSS.
+   */
+  private setSize(size: number) {
+    this.size = size;
+    this.gridDOM.style.setProperty('--size', '' + size);
+  }
+
+  /**
+   * Append `n` cells to the grid.
+   */
+  private appendCells(n: number) {
+    for (let i = 0; i < n; i++) {
+      this.gridDOM.append(this.newCell());
+    }
+  }
+
+  /**
+   * Delete all cells from the grid.
+   */
+  private deleteAllCells() {
+    this.gridDOM.replaceChildren();
   }
 
   /* =============================== Setters ================================ */

@@ -9,6 +9,7 @@ const eraserRadio = document.getElementById('eraser')!;
 const hoverRadio = document.getElementById('hover')!;
 const clickNDragRadio = document.getElementById('click-n-drag')!;
 const clearButton = document.getElementById('clear')!;
+const sizeInput = document.getElementById('size')!;
 
 function handleToolChange(e: Event) {
   const tool = (e.target as HTMLInputElement).value;
@@ -34,6 +35,10 @@ function handleModeChange(e: Event) {
   }
 }
 
+function handleSizeChange(e: Event) {
+  grid.changeSize(parseInt((e.target as HTMLInputElement).value));
+}
+
 [pencilRadio, eraserRadio].forEach((radio) =>
   radio.addEventListener('click', handleToolChange)
 );
@@ -42,6 +47,7 @@ function handleModeChange(e: Event) {
   radio.addEventListener('click', handleModeChange)
 );
 
-clearButton.addEventListener('click', grid.clearGrid);
+clearButton.addEventListener('click', grid.eraseAllCells);
+sizeInput.addEventListener('change', handleSizeChange);
 
 export {};
