@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Etch-a-Sketch</title>
+  
+  <script type="module" crossorigin src="./assets/index.bc9df75d.js"></script>
+  <link rel="stylesheet" href="./assets/index.21551aa6.css">
+</head>
+
+<body>
+  <div class="controls">
+    <div>
+      <input type="radio" name="tool" id="pencil" value="pencil" checked>
+      <label for="pencil">Pencil</label>
+      <input type="radio" name="tool" id="eraser" value="eraser">
+      <label for="eraser">Eraser</label>
+    </div>
+    <div>
+      <input type="radio" name="mode" id="click-n-drag" value="click-n-drag" checked>
+      <label for="click-n-drag">Click-n-drag</label>
+      <input type="radio" name="mode" id="hover" value="hover">
+      <label for="hover">Hover</label>
+    </div>
+    <div>
+      <button type="button" id="clear">Clear</button>
+      <input type="number" name="size" id="size" value="16" min="1" max="100">
+    </div>
+  </div>
+  <div class="cell-grid"></div>
+  
+</body>
+
+</html>
