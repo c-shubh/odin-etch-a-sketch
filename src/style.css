@@ -12,8 +12,8 @@ body {
 
 .cell-grid {
   border: 1px solid black;
-  width: 40vw;
-  height: 40vw;
+  width: 100%;
+  aspect-ratio: 1;
   display: grid;
   --size: 16;
   grid-template-columns: repeat(var(--size), 1fr);
